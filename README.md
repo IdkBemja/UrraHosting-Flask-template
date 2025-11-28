@@ -1,6 +1,6 @@
-# Python Flask on urrahost.app / urrahost.cl
+# Python Flask on urrahosting.cl
 
-This template helps you deploy a Python Flask application using Docker and environment variables managed by `.env`. The port and other settings are configured via `.env`, making it easy to adapt for [https://www.urrahost.app](https://www.urrahost.app) or urrahost.cl.
+This template helps you deploy a Python Flask application using Docker and environment variables managed by `.env`. The port and other settings are configured via `.env`, making it easy to adapt for [https://www.urrahosting.cl](https://www.urrahosting.cl) or urrahost.cl.
 
 ## Project Structure
 ```
@@ -39,7 +39,7 @@ flask
 python-dotenv
 ```
 
-## 4. Notes for urrahost.app / urrahost.cl
+## 4. Notes for urrahosting.cl
 - The port is managed via `.env` and not hardcoded in Dockerfile.
 - You can add other environment variables to `.env` as needed.
 - Make sure your app listens on `0.0.0.0` for compatibility with Docker and hosting platforms.
@@ -56,4 +56,4 @@ if __name__ == "__main__":
 
 ---
 
-Feel free to adapt this template for your deployment on urrahost.app or urrahost.cl.
+Feel free to adapt this template for your deployment on urrahosting.cl or urrahost.cl.
