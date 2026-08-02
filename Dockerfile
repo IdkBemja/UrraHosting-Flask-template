@@ -1,20 +1,22 @@
-## Use official Python base image
 FROM python:3.11-slim
 
-## Set working directory
 WORKDIR /app
 
-## Install curl
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
 
-## Copy dependency files
-COPY requirements.txt ./
+RUN groupadd -g 10001 appuser && \
+    useradd -u 10001 -g appuser -m appuser
 
-## Install dependencies
+COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-## Copy the rest of the application
 COPY . .
 
-## Command to run the app
+RUN chown -R 10001:10001 /app
+
+USER 10001:10001
+
 CMD ["python", "main.py"]
