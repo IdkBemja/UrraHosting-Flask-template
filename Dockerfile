@@ -1,22 +1,13 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
-
-RUN apt-get update && \
-    apt-get install -y curl && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN groupadd -g 10001 appuser && \
-    useradd -u 10001 -g appuser -m appuser
-
 COPY requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
 
-RUN chown -R 10001:10001 /app
-
+# APP_PORT is injected by the platform at container start and is the ONLY
+# port that will ever receive traffic; it changes per instance, so the app
+# must bind to it at runtime (shell form CMD expands $APP_PORT). Do not
+# hardcode a port.
 USER 10001:10001
-
-CMD ["python", "main.py"]
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT app:app"]
